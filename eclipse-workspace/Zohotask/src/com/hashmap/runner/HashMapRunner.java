@@ -1,7 +1,5 @@
 package com.hashmap.runner;
-import java.util.HashMap;
 import com.utility.Utility;
-import java.util.Scanner;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.BiConsumer;
@@ -17,6 +15,7 @@ public class HashMapRunner{
 		runnerObj.showTask();
 		while(bool){
 			try{
+			
 			System.out.print("Enter Task Number ");
 			choice = Utility.getIntInput();
 			switch(choice){
@@ -136,18 +135,7 @@ public class HashMapRunner{
 	public void operationTwo() throws DataValidationException	 {
 		try{
 			Map<String,String> newHashMap = taskObj.getHashMap();
-			System.out.print("Enter number of pairs to add  ");
-			int noOfPair = Utility.getIntInput(),i;
-			String key ,value;
-			for (i=0;i<noOfPair;i++){
-				System.out.print("Enter key  (String)");
-				key = Utility.getStrInput();
-				System.out.print("Enter  value (String)");
-				value = Utility.getStrInput();
-				taskObj.putToMap(newHashMap,key,value);
-			}
-		printHashMap(newHashMap);
-		printHashMapSize(newHashMap);
+			addStrToHashMap(newHashMap);
  		}
 		catch ( DataValidationException e){
 			e.printStackTrace();
@@ -218,8 +206,7 @@ public class HashMapRunner{
 			addStrToHashMap(newHashMap);
 			System.out.print("Enter key whose value need to be null ");
 			String nullKey = Utility.getStrInput();
-			String check = taskObj.replaceValue(newHashMap,nullKey,null);
-			if ( check ==  null){
+			if ( taskObj.replaceValue(newHashMap,nullKey,null)==  null){
 				System.out.println("The given key is not present ");
 			}
 			printHashMap(newHashMap);
@@ -234,7 +221,7 @@ public class HashMapRunner{
 		try{
 			Map<String,String> newHashMap = taskObj.getHashMap();
 			addStrToHashMap(newHashMap);
-			System.out.println("Making a key as null And non null value for it ");
+			System.out.println("Making a key as null And Adding a non null value for it ");
 			taskObj.putToMap(newHashMap,null,"Non Null valur");
 			printHashMap(newHashMap);
 			printHashMapSize(newHashMap);			
