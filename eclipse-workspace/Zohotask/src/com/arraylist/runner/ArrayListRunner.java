@@ -1,6 +1,5 @@
 package com.arraylist.runner;
 import com.arraylist.task.ArrayListTask;
-import java.util.ArrayList;
 import java.util.Iterator;
 import com.utility.Utility;
 import java.util.List;
