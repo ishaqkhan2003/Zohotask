@@ -1,9 +1,17 @@
 package com.singleton;
 
-public class DoubleCheckSingleton {
-	private  DoubleCheckSingleton() {}
+import java.io.Serializable;
+
+import com.exceptionhandling.DataValidationException;
+
+public class DoubleCheckSingleton implements Serializable{
+	private  DoubleCheckSingleton() throws DataValidationException {
+		if(instance!=null) {
+			throw new DataValidationException("Instance already created ");
+		}
+	}
 	private static volatile DoubleCheckSingleton instance;
-	public static DoubleCheckSingleton getINstanceOfDoubleCheck() {
+	public static DoubleCheckSingleton getInstanceOfDoubleCheck()throws DataValidationException  {
 		if(instance == null) {
 			synchronized(DoubleCheckSingleton.class) {
 				if(instance == null) {

@@ -1,5 +1,4 @@
 package com.exceptionhandling;
-import java.io.IOException;
 
 public class DataValidationException extends Exception{
 	public DataValidationException( String message ){

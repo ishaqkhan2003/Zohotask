@@ -1,10 +1,10 @@
 package com.customeobject;
 
-public class POJO {
-	public POJO() {
+public class Test {
+	public Test() {
 		//DEFAULT CONSTRUCTOR
 	}
-	public POJO(String string,int integer) {
+	public Test(String string,int integer) {
 		//OVERLOADED CONSTRUCTOR
 		this.string = string;
 		this.integer = integer;

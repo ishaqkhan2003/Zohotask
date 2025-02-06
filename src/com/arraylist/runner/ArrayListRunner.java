@@ -5,10 +5,12 @@ import com.utility.Utility;
 import java.util.List;
 import com.customeobject.CustomeObject;
 import com.exceptionhandling.DataValidationException;
-public class ArrayListRunner{
+public class ArrayListRunner {
+	private String type;
 	ArrayListTask taskObj =  new ArrayListTask();
 	public static void main(String[] args){
 		ArrayListRunner runnerObj =  new ArrayListRunner();
+		runnerObj.setType();
 		boolean bool =  true;
 		int choice;
 		runnerObj.showTask();
@@ -82,13 +84,27 @@ public class ArrayListRunner{
 							break;
 				}
 			}
-			catch ( DataValidationException e){
+			catch ( Exception e){
 				e.printStackTrace();
 			}
 		}
 	}
+	
+	public void setType() {
+		try {
+			//BasicProgrammingTask basicProgObj = new BasicProgrammingTask();	
+			//Properties property = basicProgObj.loadProperty("/home/mohammed-pt7828/eclipse-workspace/Zohotask","config");
+			//type = basicProgObj.getValue(property, "listImplementation");	
+			type = System.getProperty("listImplementation");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void showTask() {
-		
+		//System.out.println(System.getProperty("user-dir"));
+		//System.out.println(type);
 		System.out.println("1.To create an ArrayList ");
 		System.out.println("2.To create String ArrayList and add string ");
 		System.out.println("3.To create Integer ArrayList and add int ");
@@ -118,18 +134,19 @@ public class ArrayListRunner{
 	public <T> void printArrayListSize(List<T> arrayList)throws DataValidationException{
 		System.out.println("The size of Array List is = "+taskObj.getListSize(arrayList));	
 	}
-	public void operationOne() throws DataValidationException {
+	public void operationOne() throws Exception {
 		try {
-			List<Object> newArrayList = taskObj.getArrayList();
+			List<Object> newArrayList = taskObj.getArrayList(type);
 			printArrayListSize(newArrayList);
 		}
 		catch ( DataValidationException e){
 			throw new DataValidationException("Error from runner class ",e);
 		}
 	}
-	public void operationTwo() throws DataValidationException{
+	
+	public void operationTwo() throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);
 			printArrayList(stringArrayList);
 			printArrayListSize(stringArrayList);			
@@ -138,9 +155,10 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}	
 	}
-	public void operationThree() throws DataValidationException{
+	
+	public void operationThree() throws Exception{
 		try{
-			List<Integer> intArrayList = taskObj.getArrayList();
+			List<Integer> intArrayList = taskObj.getArrayList(type);
 			addIntToArrayList(intArrayList);
 			printArrayList(intArrayList);
 			printArrayListSize(intArrayList);
@@ -151,9 +169,10 @@ public class ArrayListRunner{
 		}
 		
 	}
-	public void operationFour() throws DataValidationException{
+	
+	public void operationFour() throws Exception{
 		try{
-			List<CustomeObject> customeArrayList = taskObj.getArrayList();
+			List<CustomeObject> customeArrayList = taskObj.getArrayList(type);
 			System.out.print("Enter number of objects to be added  ");
 			int noOfObj = Utility.getIntInput(),i;
 			for ( i = 0;i<noOfObj;i++){
@@ -168,9 +187,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationFive()throws DataValidationException{
+	public void operationFive()throws Exception{
 		try{
-			List<Object> objArrayList = taskObj.getArrayList();
+			List<Object> objArrayList = taskObj.getArrayList(type);
 			System.out.print("Enter Number of Strings to add ");
 			int noOfString = Utility.getIntInput(),i;
 			for (i=0;i<noOfString;i++){
@@ -198,9 +217,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationSix() throws DataValidationException{
+	public void operationSix() throws Exception{
 		try{
-		List<String> stringArrayList = taskObj.getArrayList();
+		List<String> stringArrayList = taskObj.getArrayList(type);
 		addStringToArrayList(stringArrayList);				
 		printArrayList(stringArrayList);
 		printArrayListSize(stringArrayList);
@@ -219,9 +238,9 @@ public class ArrayListRunner{
 		}
 				
 	}
-	public void operationSeven() throws DataValidationException{
+	public void operationSeven() throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);
 			printArrayList(stringArrayList);
 			printArrayListSize(stringArrayList);
@@ -242,9 +261,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationEight() throws DataValidationException{
+	public void operationEight() throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);			
 			printArrayList(stringArrayList);
 			printArrayListSize(stringArrayList);
@@ -256,9 +275,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationNine() throws DataValidationException{
+	public void operationNine() throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);			
 			printArrayList(stringArrayList);
 			printArrayListSize(stringArrayList);
@@ -281,9 +300,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 		}
-	public void operationTen() throws DataValidationException{
+	public void operationTen() throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);
 			System.out.print("Enter String to insert ");
 			String insertString = Utility.getStrInput();
@@ -297,15 +316,15 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationEleven()throws DataValidationException{
+	public void operationEleven()throws Exception{
 		try{
-			List<String> stringArrayListOne = taskObj.getArrayList();
+			List<String> stringArrayListOne = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListOne);
 			System.out.print("Enter From Index ");
 			int fromIndex = Utility.getIntInput();
 			System.out.print("Enter to index :");
 			int toIndex = Utility.getIntInput();
-			List<String> stringArrayListTwo = taskObj.getArrayList();
+			List<String> stringArrayListTwo = taskObj.getArrayList(type);
 			taskObj.getSubList(stringArrayListOne,stringArrayListTwo,fromIndex,toIndex);
 			printArrayList(stringArrayListOne);
 			printArrayListSize(stringArrayListOne);
@@ -316,13 +335,13 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationTwelve() throws DataValidationException{
+	public void operationTwelve() throws Exception{
 		try{
-			List<String> stringArrayListOne = taskObj.getArrayList();
+			List<String> stringArrayListOne = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListOne);
-			List<String> stringArrayListTwo = taskObj.getArrayList();
+			List<String> stringArrayListTwo = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListTwo);
-			List<String> stringArrayListThree = taskObj.getArrayList();
+			List<String> stringArrayListThree = taskObj.getArrayList(type);
 			taskObj.createList(stringArrayListThree,stringArrayListOne);
 			taskObj.createList(stringArrayListThree,stringArrayListTwo);
 			printArrayList(stringArrayListThree);
@@ -332,13 +351,13 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationThirteen() throws DataValidationException{
+	public void operationThirteen() throws Exception{
 		try{
-			List<String> stringArrayListOne = taskObj.getArrayList();
+			List<String> stringArrayListOne = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListOne);
-			List<String> stringArrayListTwo = taskObj.getArrayList();
+			List<String> stringArrayListTwo = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListTwo);
-			List<String> stringArrayListThree = taskObj.getArrayList();
+			List<String> stringArrayListThree = taskObj.getArrayList(type);
 			taskObj.createList(stringArrayListThree,stringArrayListTwo);
 			taskObj.createList(stringArrayListThree,stringArrayListOne);
 			printArrayList(stringArrayListThree);
@@ -349,9 +368,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationFourteen() throws DataValidationException{
+	public void operationFourteen() throws Exception{
 		try{
-			List<Float> floatArrayList = taskObj.getArrayList();
+			List<Float> floatArrayList = taskObj.getArrayList(type);
 			addFloatToArrayList(floatArrayList);
 			System.out.print("Enter index for deletion ");
 			int index = Utility.getIntInput();
@@ -364,11 +383,11 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationFifteen() throws DataValidationException{
+	public void operationFifteen() throws Exception{
 		try{
-			List<String> stringArrayListOne = taskObj.getArrayList();
+			List<String> stringArrayListOne = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListOne);
-			List<String> stringArrayListTwo = taskObj.getArrayList();
+			List<String> stringArrayListTwo = taskObj.getArrayList(type);
 			System.out.print("Enter form index ");
 			int fromIndex = Utility.getIntInput();
 			System.out.print("Enter to index :");
@@ -387,11 +406,11 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationSixteen() throws DataValidationException{
+	public void operationSixteen() throws Exception{
 		try{
-			List<String> stringArrayListOne = taskObj.getArrayList();
+			List<String> stringArrayListOne = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayListOne);
-			List<String> stringArrayListTwo = taskObj.getArrayList();
+			List<String> stringArrayListTwo = taskObj.getArrayList(type);
 			System.out.print("Enter form index ");
 			int fromIndex = Utility.getIntInput();
 			System.out.print("Enter to index :");
@@ -410,9 +429,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationSeventeen()throws DataValidationException{
+	public void operationSeventeen()throws Exception{
 		try{
-			List<Long> longArrayList= taskObj.getArrayList();
+			List<Long> longArrayList= taskObj.getArrayList(type);
 			addLongToArrayList(longArrayList);
 			taskObj.clearAll(longArrayList);
 			printArrayList(longArrayList);
@@ -423,9 +442,9 @@ public class ArrayListRunner{
 			throw new DataValidationException("Error from Runner class ",e);
 		}
 	}
-	public void operationEighteen()throws DataValidationException{
+	public void operationEighteen()throws Exception{
 		try{
-			List<String> stringArrayList = taskObj.getArrayList();
+			List<String> stringArrayList = taskObj.getArrayList(type);
 			addStringToArrayList(stringArrayList);
 			System.out.print(" Enter string to check ");
 			String string = Utility.getStrInput();

@@ -1,12 +1,18 @@
 package com.arraylist.task;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import com.utility.Utility;
 import java.util.List;
 import java.util.Iterator;
+import java.lang.reflect.Constructor;
+
 import com.exceptionhandling.DataValidationException;
 public class ArrayListTask {
-		public <T> List<T> getArrayList(){
-			return new ArrayList<>() ;
+		public <T> List<T> getArrayList(String string) throws Exception{
+			Utility.checkNull(string);
+			Class<?> clazz = Class.forName(string);
+			Constructor<?>  constructor = clazz.getConstructor();
+			List<T> newInstance = (List<T>) constructor.newInstance();
+			return newInstance;
 		}
 		public <T> void createList( List<T> listOne,List<T> listTwo) throws DataValidationException{
 			Utility.checkNull(listOne);

@@ -1,7 +1,15 @@
 package com.singleton;
 
-public class StaticBlockSingleton {
-	private StaticBlockSingleton() {}
+import java.io.Serializable;
+
+import com.exceptionhandling.DataValidationException;
+
+public class StaticBlockSingleton implements Serializable{
+	private StaticBlockSingleton() throws DataValidationException {
+		if(instance!=null) {
+			throw new DataValidationException("Instance already created ");
+		}
+	}
 	private static StaticBlockSingleton instance;
 	static {
 		try {
@@ -13,5 +21,8 @@ public class StaticBlockSingleton {
 	}
 	public  static StaticBlockSingleton getInstanceOfStaticBlock() {
 		return instance;
+	}
+	protected Object readResolve() {
+		return getInstanceOfStaticBlock();
 	}
 }
