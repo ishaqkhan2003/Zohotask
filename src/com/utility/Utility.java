@@ -1,5 +1,7 @@
 package com.utility ;
 import com.exceptionhandling.DataValidationException;
+import java.util.List;
+
 import java.util.Scanner;
 import java.util.Map;
 public  class Utility {
@@ -16,6 +18,12 @@ public  class Utility {
 			throw new DataValidationException("Out of Index ");
 		}
 	}
+	
+	public static <T> int getLength(List<T> list) throws DataValidationException{
+		checkNull(list);
+		return list.size();
+	}
+	
 	public static <K,V>int getLength(Map<K,V> map) throws DataValidationException{
 		checkNull(map);
 		return map.size();

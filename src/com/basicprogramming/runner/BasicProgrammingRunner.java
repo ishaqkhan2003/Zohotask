@@ -28,13 +28,13 @@ import java.util.logging.SimpleFormatter;
 import com.time.task.TimeTask;
 
 public class BasicProgrammingRunner {
-	private static final Logger logger = Logger.getLogger(BasicProgrammingRunner.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(BasicProgrammingRunner.class.getName());
 	TimeTask timeObj = new TimeTask();
 	BasicProgrammingTask taskObj = new BasicProgrammingTask();
 	
 	static {
 		try {
-			logger.setUseParentHandlers(false);
+			LOGGER.setUseParentHandlers(false);
 			FileHandler severeHandler = new FileHandler("severelog",true);
 			FileHandler infoHandler = new FileHandler("infolog",true);
 			severeHandler.setFormatter(new SimpleFormatter());
@@ -42,11 +42,11 @@ public class BasicProgrammingRunner {
 			severeHandler.setLevel(Level.SEVERE);
 			infoHandler.setLevel(Level.INFO);
 			infoHandler.setFilter(log->log.getLevel()==Level.INFO);
-			logger.addHandler(infoHandler);
-			logger.addHandler(severeHandler);
+			LOGGER.addHandler(infoHandler);
+			LOGGER.addHandler(severeHandler);
 		}
 		catch(Exception e) {
-			logger.log(Level.SEVERE,"Error in handler creation",e);
+			LOGGER.log(Level.SEVERE,"Error in handler creation",e);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class BasicProgrammingRunner {
 				
 			}
 			catch(Exception e) {
-				logger.log(Level.SEVERE,"Error catched in main method ",e);
+				LOGGER.log(Level.SEVERE,"Error catched in main method ",e);
 
 			}
 		}
@@ -108,7 +108,7 @@ public class BasicProgrammingRunner {
 	}
 
 	public void operationOne(String filePath) throws Exception{
-		logger.info("Running Operation one");
+		LOGGER.info("Running Operation one");
 		System.out.print("Enter File name ");
 		String fileName = Utility.getStrInput();
 		System.out.print("Enter no of lines  ");
@@ -119,13 +119,13 @@ public class BasicProgrammingRunner {
 			strings[i] = Utility.getStrInput();
 		}
 		taskObj.writeToFile(filePath, fileName, strings);
-		logger.info("Successfully written to file ");
+		LOGGER.info("Successfully written to file ");
 
 		
 	}
 	
 	public void operationTwo(String filePath)throws Exception{
-		logger.info("Running Operation Two");
+		LOGGER.info("Running Operation Two");
 		Properties myProperty = taskObj.getProperties();
 		System.out.print("Enter number of key and value to be stored ");
 		int noOfPairs = Utility.getIntInput(),i;
@@ -143,37 +143,37 @@ public class BasicProgrammingRunner {
 		System.out.print("Enter File name ");
 		fileName = Utility.getStrInput();
 		taskObj.storeProperty(myProperty, filePath, fileName,comments);
-		logger.info("Property set into the "+fileName+" file");
+		LOGGER.info("Property set into the "+fileName+" file");
 
 		
 	}
 	
 	public void operationThree(String filePath) throws DataValidationException,IOException{
 		// TODO Auto-generated method stub
-		logger.info("Running Operation Three ");
+		LOGGER.info("Running Operation Three ");
 		String  fileName;
 		System.out.print("Enter file name ");
 		fileName = Utility.getStrInput();	
 		Properties property = taskObj.getProperties();
 		property = taskObj.loadProperty(filePath, fileName);
 		for(String key : taskObj.getStringPropertyName(property)) {
-			logger.info("The key is "+key+" and its value is "+taskObj.getValue(property,key));
+			LOGGER.info("The key is "+key+" and its value is "+taskObj.getValue(property,key));
 		}
 
 
 	}
 	
 	public void operationFour()throws Exception {
-		logger.info("Running Operation Four");
+		LOGGER.info("Running Operation Four");
 		String  filePath;
 		System.out.print("Enter file Path ");
 		filePath = Utility.getStrInput();
 		if(taskObj.makeNewDirectory(filePath)) {
-			logger.info("Running operation one ");
+			LOGGER.info("Running operation one ");
 			operationOne(filePath+File.separator);
-			logger.info("Running operation two ");
+			LOGGER.info("Running operation two ");
 			operationTwo(filePath+File.separator);
-			logger.info("Running operation three ");
+			LOGGER.info("Running operation three ");
 			operationThree(filePath+File.separator);
 		}
 		else {
@@ -182,25 +182,25 @@ public class BasicProgrammingRunner {
 	}
 	
 	public void operationFive() {
-		logger.info("Running Operation Five");
+		LOGGER.info("Running Operation Five");
 		System.out.print("Enter string to append ");
 		String string = Utility.getStrInput();
 		CustomeObject customeObj = new CustomeObject(string);
-		logger.info("The object is "+customeObj);
+		LOGGER.info("The object is "+customeObj);
 	}
 	
 	public void operatonSix()throws DataValidationException {
-		logger.info("Running Operation Six");
+		LOGGER.info("Running Operation Six");
 		System.out.print("Enter a string ");
 		String string = Utility.getStrInput();
 		System.out.print("Enter a integer value ");
 		int integer = Utility.getIntInput();
 		Test pojoObj =  new Test(string,integer);
-		logger.info("Printing the created object "+pojoObj);
+		LOGGER.info("Printing the created object "+pojoObj);
 	}
 	
 	public void operationSeven() {
-		logger.info("Running Operation Seven ");
+		LOGGER.info("Running Operation Seven ");
 		System.out.print("Enter a string ");
 		String string = Utility.getStrInput();
 		System.out.print("Enter a integer value ");
@@ -208,23 +208,23 @@ public class BasicProgrammingRunner {
 		Test pojoObj =  new Test();
 		pojoObj.setInteger(integer);
 		pojoObj.setString(string);
-		logger.info("Printing the created object "+pojoObj);
+		LOGGER.info("Printing the created object "+pojoObj);
 	}
 	
 	public  void operationEight() throws Exception{
 		try {
-			logger.info("Running Operation Eight");
+			LOGGER.info("Running Operation Eight");
 		Class<?> clazz = Class.forName("com.customeobject.Test");
 		Constructor<?> defaultConstructor = clazz.getConstructor();
 		Object testObjOne = defaultConstructor.newInstance();
-		logger.info("The default constructor  "+testObjOne);
+		LOGGER.info("The default constructor  "+testObjOne);
 		System.out.print("Creating overloaded constructor \n Enter a string ");
 		String string = Utility.getStrInput();
 		System.out.print("Enter a integer value ");
 		int integer = Utility.getIntInput();
 		Constructor<?> overloadedCons = clazz.getConstructor(String.class,int.class);
 		Object testObjTwo = overloadedCons.newInstance(string,integer);
-		logger.info("The overloaded constructor  "+testObjTwo);
+		LOGGER.info("The overloaded constructor  "+testObjTwo);
 		System.out.print("Calling getter and setter using reflection \n Enter a string to invoke setter ");
 		String setterString = Utility.getStrInput();
 		System.out.print("Enter a integer value to invoke setter ");
@@ -235,10 +235,10 @@ public class BasicProgrammingRunner {
 		setterMethodTwo.invoke(testObjTwo, setterInt);
 		Method getterMethodOne = clazz.getMethod("getString");
 		String getStringMethod = (String) getterMethodOne.invoke(testObjTwo);
-		logger.info("The string value from setter"+getStringMethod);
+		LOGGER.info("The string value from setter"+getStringMethod);
 		Method getterMethodTwo = clazz.getMethod("getInteger");
 		int getterInt  = (int)getterMethodTwo.invoke(testObjTwo);
-		logger.info("The integer value from integer "+getterInt);	
+		LOGGER.info("The integer value from integer "+getterInt);	
 		}
 		catch(Exception e) {
 			throw new DataValidationException("Eroor from runner method ",e);
@@ -247,15 +247,15 @@ public class BasicProgrammingRunner {
 	}
 	
 	public void operationNine() {
-		logger.info("Running Operation Nine");
+		LOGGER.info("Running Operation Nine");
 		for(Rainbow rainbow:Rainbow.values()) {
-			logger.info("The color is "+rainbow+" the value is "+rainbow.getValue());
-			logger.info("The ordinal is "+rainbow.ordinal());
+			LOGGER.info("The color is "+rainbow+" the value is "+rainbow.getValue());
+			LOGGER.info("The ordinal is "+rainbow.ordinal());
 		}
 	}
 	
 	public void operationTen() throws DataValidationException{
-		logger.info("Running Operation Ten");
+		LOGGER.info("Running Operation Ten");
 		LazyInitializeSingleton instanceOne  = LazyInitializeSingleton.getInstanceOfSingleton();
 		EagerInitializeSingleton instanceTwo  = EagerInitializeSingleton.getInstanceOfEager();
 		DoubleCheckSingleton instanceThree = DoubleCheckSingleton.getInstanceOfDoubleCheck();
@@ -263,36 +263,36 @@ public class BasicProgrammingRunner {
 		BillPughSingleton instanceFive = BillPughSingleton.getInstanceOfBillPugh();
 		ThreadSafeLazySingleton instanceSix = ThreadSafeLazySingleton.getInstanceOfThreadSafe();
 		EnumSingleton instanceSeven = EnumSingleton.INSTANCE;
-		logger.info("Eager initialize Singleton         "+instanceTwo);
-		logger.info("Static Block initialize Singleton  "+instanceFour);
-		logger.info("Lazy initialize Singleton          "+instanceOne);
-		logger.info("Threadsafe initialize Singleton    "+instanceSix);
-		logger.info("Double Check initialize Singleton  " +instanceThree);
-		logger.info("BillPugh initialize Singleton      "+instanceFive);
-		logger.info("Enum initialize Singleton          "+instanceSeven);
+		LOGGER.info("Eager initialize Singleton         "+instanceTwo);
+		LOGGER.info("Static Block initialize Singleton  "+instanceFour);
+		LOGGER.info("Lazy initialize Singleton          "+instanceOne);
+		LOGGER.info("Threadsafe initialize Singleton    "+instanceSix);
+		LOGGER.info("Double Check initialize Singleton  " +instanceThree);
+		LOGGER.info("BillPugh initialize Singleton      "+instanceFive);
+		LOGGER.info("Enum initialize Singleton          "+instanceSeven);
 	}
 	
 	public void operationEleven() throws Exception{
 		System.out.print("Enter ZoneId ");
         String zone =Utility.getStrInput();
-		logger.info("Running Operation Eleven");
+		LOGGER.info("Running Operation Eleven");
 		String format = getFormat();
-		logger.info(timeObj.getZonedDateTime(ZoneId.of(zone),format));
-		logger.info("LocalTime in milli Seconds  "+timeObj.getTimeInMillis());
-		logger.info("Time in millis using SystemCurrentMillis"+timeObj.getSystemCurrentMillis());
+		LOGGER.info(timeObj.getZonedDateTime(ZoneId.of(zone),format));
+		LOGGER.info("LocalTime in milli Seconds  "+timeObj.getTimeInMillis());
+		LOGGER.info("Time in millis using SystemCurrentMillis"+timeObj.getSystemCurrentMillis());
 		printAvailableZoneId();
 
 		String zoneIdFormat = getFormat();
-		logger.info("The current time for entered zone is "+timeObj.getZonedDateTime(timeObj.getZoneId(zone),zoneIdFormat));
+		LOGGER.info("The current time for entered zone is "+timeObj.getZonedDateTime(timeObj.getZoneId(zone),zoneIdFormat));
        
         System.out.print("Enter millis ");
         long millis = Utility.getLongInput();
 		DayOfWeek dayOfWeek = timeObj.getDayOfWeekFromMillis(millis,timeObj.getZoneId(zone));
-		logger.info("The day of week is "+dayOfWeek);
+		LOGGER.info("The day of week is "+dayOfWeek);
 		Month month = timeObj.getMonthFromMillis(millis,timeObj.getZoneId(zone));
-		logger.info("The month from millis is "+month);
+		LOGGER.info("The month from millis is "+month);
 		int year = timeObj.getYearFromMillis(millis,timeObj.getZoneId(zone));
-		logger.info("Year from millis is "+year);
+		LOGGER.info("Year from millis is "+year);
 		
 
 		
@@ -309,7 +309,7 @@ public class BasicProgrammingRunner {
 	
 	public void operationTwelve() throws DataValidationException{
 		try {
-		logger.info("Running Operation Twelve");
+		LOGGER.info("Running Operation Twelve");
 		System.out.print("Enter ZoneId ");
 	    String zone =Utility.getStrInput();
 	    System.out.print("Enter Year");
@@ -326,7 +326,7 @@ public class BasicProgrammingRunner {
 	    int second = Utility.getIntInput();
 	    System.out.print("Enter nano Second ");
 	    int nanoSec = Utility.getIntInput();
-		logger.info(" Offeset is "+timeObj.getDSTOffset(year,month,date,hour,minute,second,nanoSec,timeObj.getZoneId(zone)));
+		LOGGER.info(" Offeset is "+timeObj.getDSTOffset(year,month,date,hour,minute,second,nanoSec,timeObj.getZoneId(zone)));
 		}
 		catch(Exception e) {
 			throw new DataValidationException("Error in operation twelve",e);
